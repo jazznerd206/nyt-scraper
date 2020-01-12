@@ -29,7 +29,10 @@ app.set('view engine', 'handlebars');
 // Connect to the Mongo DB
 let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, error => console.log("error: " + error));
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, (error) => {
+	if (!error) {console.log("Connected!");}
+	else (console.log('mongoose error: ' + error));
+});
 
 
 require('./routes/html-routes')(app);
