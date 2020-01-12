@@ -34,16 +34,8 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, (error) => {
 	else (console.log('mongoose error: ' + error));
 });
 
-// const router = require('./routes/api-routes');
-// require('./routes/html-routes')(app);
-
-// app.use('/', router)
-//setting up routes
-const index = require('./routes/api-routes'),
-      articles = require('./routes/html-routes');
-
-app.use('/', index);
-app.use('/articles', articles);
+const routes = require('./routes/index');
+app.use(routes);
 
 
 //var syncOptions = { force: false };
