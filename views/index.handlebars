@@ -11,7 +11,7 @@
         <li><a href="#">Home</a></li>
         <li><a href="#">Saved Articles</a></li>
         <div class="button">
-            <li><a href="#">Scrape New Articles</a></li>
+            <li><a href="/scrape">Scrape New Articles</a></li>
         </div>
         <div class="button">
             <li><a href="#">Clear Articles</a></li>
@@ -25,7 +25,9 @@
 </div>
 
 <div class="grid" id="article-container">
-    text here
+    <div class="grid-x">
+      {{>article}}
+    </div>
 </div>
 
 <div class="footer">
