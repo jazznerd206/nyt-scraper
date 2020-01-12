@@ -44,7 +44,7 @@ module.exports = function(app) {
                 });
             });
             // Send a message to the client
-            res.send("Scrape Complete");
+            res.render('index');
         });
         })
 
