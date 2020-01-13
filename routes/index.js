@@ -35,7 +35,7 @@ router.get("/scrape", function(req, res) {
             db.Article.create(result)
             .then(function(dbArticle) {
                 // View the added result in the console:
-                // console.log(dbArticle);
+                console.log(dbArticle);
             })
             .catch(function(error) {
                 // Send the error, if it exists.
@@ -50,19 +50,13 @@ router.get("/scrape", function(req, res) {
 
 // *** Routes to export to server.js *** //
 
-// Route to get all Articles from the db.
+// Route to get all Articles from the db to handlebars.
 router.get("/", function(req, res) {
-    // Limit set to only show first 20 articles.
-    db.Article.find({}).limit(20)
-    .then(function(scrapedData) {
-        // Save all scraped data into a handlebars object.
-        var hbsObject = {articles:scrapedData};
-        console.log(hbsObject);
-        // Send all found articles as an object to be used in the handlebars receieving section of the index.
-        res.render("index", hbsObject);
+    db.Article.find({}).limit(15)
+    .then((articles) => {
+    res.render('index', {articles})
     })
     .catch(function(error) {
-        // If an error occurs, send the error to the client.
         res.json(error);
     });
 });
@@ -70,37 +64,29 @@ router.get("/", function(req, res) {
 
 // Route for getting all Articles from the db
 router.get("/articles", function(req, res) {
-    // Grab every document in the Articles collection
     db.Article.find({})
     .then(function(dbArticle) {
-        // If we were able to successfully find Articles, send them back to the client
         res.json(dbArticle);
     })
     .catch(function(err) {
-        // If an error occurred, send it to the client
         res.json(err);
     });
 });
 
 // Route for grabbing a specific Article by id, populate it with it's note
 router.get("/articles/:id", function(req, res) {
-    // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
     db.Article.findOne({ _id: req.params.id })
-    // ..and populate all of the notes associated with it
     .populate("note")
     .then(function(dbArticle) {
-        // If we were able to successfully find an Article with the given id, send it back to the client
         res.json(dbArticle);
     })
     .catch(function(err) {
-        // If an error occurred, send it to the client
         res.json(err);
     });
 });
 
 // Route to save an Article.
 router.put("/saved/:id", function(req, res) {
-    // Update the article's boolean "saved" status to 'true.'
     db.Article.update(
         {_id: req.params.id},
         {saved: true}
@@ -109,7 +95,6 @@ router.put("/saved/:id", function(req, res) {
         res.json(result);
     })
     .catch(function(error) {
-        // If an error occurs, send the error to the client.
         res.json(error);
     });
 });
