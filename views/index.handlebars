@@ -39,8 +39,11 @@
                 <div class="card-section">
                     <h4>{{link}}</h4>
                     <p>{{summary}}</p>
+                    <p>{{_id}}</p>
                 </div>
-                <div class="button" data-id="{{_id}}" href="/saved/{{_id}}">Save</div>
+                <div class="button save-article" data-id="{{_id}}">
+                  <span>Save</span>
+                </div>
             </div>
         </div>
         {{/unless}}
@@ -51,7 +54,9 @@
 
 <hr>
 
-<div class="grid" id="article-container">
+<h1>SAVED ARTICLES</h1>
+
+<div class="grid" id="saved-article-container">
     <div class="grid-x">
       {{#each articles}}
         {{#if saved}}
@@ -65,7 +70,6 @@
                     <h4>{{link}}</h4>
                     <p>{{summary}}</p>
                 </div>
-                <div class="button" data-id="{{_id}}" href="/saved/{{_id}}">Save</div>
             </div>
         </div>
         {{/if}}

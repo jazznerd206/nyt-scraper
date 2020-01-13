@@ -12,5 +12,28 @@ $(document).on('click', '#scrape', (req, res) => {
     $.ajax({
         url: '/scrape',
         method: 'GET'
-    }).then((response) => window.location.reload('/'));
+    }).then((response) => window.location.replace('/'));
 })
+
+
+// When you click the savenote button
+$(document).on("click", ".save-article", function() {
+    // Grab the id associated with the article from the submit button
+    var thisId = $(this).attr("data-id");
+    console.log('this fucking shit: ' + thisId)
+  
+    // Run a POST request to change the note, using what's entered in the inputs
+    $.ajax({
+      method: "PUT",
+      url: "/saved/" + thisId,
+      data: {
+        saved: {$get:true}
+      }
+    })
+      // With that done
+      .then(function(data) {
+        // Log the response
+        console.log(data);
+        // Empty the notes section
+      });
+    })
