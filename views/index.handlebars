@@ -32,6 +32,15 @@
         {{#unless saved}}
           <div class="cell medium-3 small-12">
             <div class="card animated fadeIn" style="width: 300px;">
+              <p><button class="button expanded" data-open="exampleModal1">Add Note</button></p>
+              <div class="reveal" id="exampleModal1" data-reveal>
+                <input type="text" value="" placeholder="Enter Username" id="username">
+                <input type="text" value="" placeholder="Enter Note" id="note">
+                <div class="button" value="submit" id="submit-note" data-id="{{_id}}"></div>
+                <button class="close-button" data-close aria-label="Close modal" type="button">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
                 <div class="card-divider">
                     <h4>{{title}}</h4>
                 </div>
@@ -58,6 +67,9 @@
               {{#if saved}}
                 <div class="cell medium-3 small-12">
                   <div class="card animated fadeIn" style="width: 300px;">
+
+                    
+
                       <div class="card-divider">
                           <h4>{{title}}</h4>
                       </div>
