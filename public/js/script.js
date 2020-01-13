@@ -5,14 +5,17 @@ $(document).on('click', '#delete', (req, res) => {
     $.ajax({
         url: '/delete-articles',
         method: 'DELETE'
-    }).then((response) => window.location.reload('/'));
+    }).then((response) => window.location.reload('/'))
+    .catch(error => console.log(error));
 })
 $(document).on('click', '#scrape', (req, res) => {
     $('#article-container').empty();
     $.ajax({
         url: '/scrape',
         method: 'GET'
-    }).then((response) => window.location.replace('/'));
+    }).then((response) => window.location.replace('/'))
+    .catch(error => console.log(error));
+
 })
 
 
@@ -34,6 +37,5 @@ $(document).on("click", ".save-article", function() {
       .then(function(data) {
         // Log the response
         console.log(data);
-        // Empty the notes section
       });
     })
