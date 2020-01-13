@@ -44,7 +44,7 @@ router.get("/scrape", function(req, res) {
         });
 
         // Alert the client if the scrape was completed:
-        res.send("Scrape was successful!");
+        res.send('scrape complete. redirecting.')
     });
 });
 
@@ -99,8 +99,14 @@ router.put("/saved/:id", function(req, res) {
     });
 });
 
+// Route to view saved articles
+router.get('/saved', (req, res) => {
+    db.Article.find({ "saved" : {$get:true}})
+    .then((result => res.render('index', {result})))
+})
+
 // Route to drop the Articles collection.
-router.get("/drop-articles", function(req, res, next) {
+router.get("/delete-articles", function(req, res, next) {
     db.Article.deleteMany({}, function(err) {
         if (err) {
             console.log(err)

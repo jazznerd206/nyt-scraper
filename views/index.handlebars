@@ -11,10 +11,10 @@
         <li><a href="#">Home</a></li>
         <li><a href="#">Saved Articles</a></li>
         <div class="button">
-            <li><a href="/scrape">Scrape New Articles</a></li>
+            <li><a href="/scrape" id="scrape">Scrape New Articles</a></li>
         </div>
-        <div class="button">
-            <li><a href="/drop-articles">Clear Articles</a></li>
+        <div class="button" id="delete">
+            <li><a href="/delete-articles">Clear Articles</a></li>
         </div>
       </ul>
     </div>
@@ -27,25 +27,53 @@
 
 <div class="grid" id="article-container">
     <div class="grid-x">
+    {{#if articles}}
       {{#each articles}}
         {{#unless saved}}
           <div class="cell medium-3 small-12">
             <div class="card" style="width: 300px;">
                 <div class="card-divider">
                     <h2>{{title}}</h2>
-                    <h2>{{_id}}</h2>
                 </div>
                 <img src="assets/img/generic/rectangle-1.jpg">
                 <div class="card-section">
                     <h4>{{link}}</h4>
                     <p>{{summary}}</p>
                 </div>
+                <div class="button" data-id="{{_id}}" href="/saved/{{_id}}">Save</div>
             </div>
         </div>
         {{/unless}}
       {{/each}}
+    {{/if}}
     </div>
 </div>
+
+<hr>
+
+<div class="grid" id="article-container">
+    <div class="grid-x">
+      {{#each articles}}
+        {{#if saved}}
+          <div class="cell medium-3 small-12">
+            <div class="card" style="width: 300px;">
+                <div class="card-divider">
+                    <h2>{{title}}</h2>
+                </div>
+                <img src="assets/img/generic/rectangle-1.jpg">
+                <div class="card-section">
+                    <h4>{{link}}</h4>
+                    <p>{{summary}}</p>
+                </div>
+                <div class="button" data-id="{{_id}}" href="/saved/{{_id}}">Save</div>
+            </div>
+        </div>
+        {{/if}}
+      {{/each}}
+    </div>
+</div>
+
+
 
 <div class="footer">
     <p>NYT Mongo Scraper</p>    
