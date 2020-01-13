@@ -18,8 +18,9 @@ router.get("/scrape", function(req, res) {
         var $ = cheerio.load(response.data);
 
         // Get every h1 within an article tag...
-            $("article h2").each(function(i, element) {
+            $("article").each(function(i, element) {
                 // Save an empty result object
+                let imageUrl = $(element).find('img').attr('src');
                 var result = {};
                 result.title = $(this)
                     .children('a')
@@ -30,6 +31,7 @@ router.get("/scrape", function(req, res) {
                 result.summary = $(this)
                     .children('a')
                     .text();
+                result.imageUrl = imageUrl
 
             // Create a new Article with the `result` object built from scraping.
             db.Article.create(result)

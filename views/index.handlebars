@@ -31,16 +31,11 @@
       {{#each articles}}
         {{#unless saved}}
           <div class="cell medium-3 small-12">
-            <div class="card" style="width: 300px;">
+            <div class="card animated fadeIn" style="width: 300px;">
                 <div class="card-divider">
-                    <h2>{{title}}</h2>
+                    <h4>{{title}}</h4>
                 </div>
-                <img src="assets/img/generic/rectangle-1.jpg">
-                <div class="card-section">
-                    <h4>{{link}}</h4>
-                    <p>{{summary}}</p>
-                    <p>{{_id}}</p>
-                </div>
+                <a href="{{link}}"></a><img src="{{imageUrl}}">
                 <div class="button save-article" data-id="{{_id}}">
                   <span>Save</span>
                 </div>
@@ -58,24 +53,25 @@
 
 <div class="grid" id="saved-article-container">
     <div class="grid-x">
-      {{#each articles}}
-        {{#if saved}}
-          <div class="cell medium-3 small-12">
-            <div class="card" style="width: 300px;">
-                <div class="card-divider">
-                    <h2>{{title}}</h2>
-                </div>
-                <img src="assets/img/generic/rectangle-1.jpg">
-                <div class="card-section">
-                    <h4>{{link}}</h4>
-                    <p>{{summary}}</p>
-                </div>
-            </div>
-        </div>
-        {{/if}}
-      {{/each}}
-    </div>
-</div>
+          {{#if articles}}
+            {{#each articles}}
+              {{#if saved}}
+                <div class="cell medium-3 small-12">
+                  <div class="card animated fadeIn" style="width: 300px;">
+                      <div class="card-divider">
+                          <h4>{{title}}</h4>
+                      </div>
+                      <a href="{{link}}"></a><img src="{{imageUrl}}">
+                      <div class="button save-article" data-id="{{_id}}">
+                        <span>Save</span>
+                      </div>
+                  </div>
+              </div>
+              {{/if}}
+            {{/each}}
+          {{/if}}
+          </div>
+      </div>
 
 
 

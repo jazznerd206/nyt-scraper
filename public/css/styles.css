@@ -9,9 +9,28 @@ body {
 /* article styles */
 #article-container {
     background: orange;
-    width: 100%;
+    margin: 40px 40px 40px 40px;
+    padding: 40px 40px 40px 40px
+}
+#saved-article-container {
+  background: orange;
+  margin: 40px 40px 40px 40px;
+  padding: 40px 40px 40px 40px
 }
 
+/* card styles */
+.card {
+  border: 10px solid goldenrod;
+  border-radius: 25px;
+  box-shadow: 5px 5px 15px;
+}
+.card .button {
+  letter-spacing: .1em;
+}
+.card .button:hover {
+  letter-spacing: .5em;
+  transition: .1s;
+}
 
 
 /* topbar styles */

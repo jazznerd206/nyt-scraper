@@ -16,13 +16,13 @@ $(document).on('click', '#scrape', (req, res) => {
 })
 
 
-// When you click the savenote button
+// When you click the save article button
 $(document).on("click", ".save-article", function() {
     // Grab the id associated with the article from the submit button
     var thisId = $(this).attr("data-id");
     console.log('this fucking shit: ' + thisId)
   
-    // Run a POST request to change the note, using what's entered in the inputs
+    // Run a POST request to change the article to saved
     $.ajax({
       method: "PUT",
       url: "/saved/" + thisId,
