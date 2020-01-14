@@ -44,7 +44,9 @@
                 <div class="card-divider">
                     <h4><a href="{{link}}">{{title}}</a></h4>
                 </div>
-                
+                {{#if articles.note}}
+                  <p>{{articles.note}}</p>
+                {{/if}}
                 <div class="button save-article" data-id="{{_id}}">
                   <span>Save</span>
                 </div>

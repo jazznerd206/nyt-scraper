@@ -42,6 +42,8 @@ $(document).on("click", ".save-article", function() {
       }
     })
       .then(function(data) {
+        alert("Article Saved!!")
+        window.location.reload();
         console.log(data);
       });
     })

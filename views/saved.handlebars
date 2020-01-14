@@ -32,16 +32,15 @@
               {{#if saved}}
                 <div class="cell medium-3 small-12">
                   <div class="card animated fadeIn" style="width: 300px;">
-                    <p><button class="button expanded" data-open="exampleModal1">Add Note</button></p>
-                    <div class="reveal" id="exampleModal1" data-reveal>
-                      <input <input id='titleinput' name='title' placeholder="Enter Username" id="username">
-                      <input type="text" value="" placeholder="Enter Note" id="note">
-                      <div class="button" value="submit" id="submit-note" data-id="{{_id}}">Submit</div>
-                      <div class="button float-right" value="delete" id="deletenote" data-id="{{_id}}" data-close>Delete</div>
-                      <button class="close-button" data-close aria-label="Close modal" type="button">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
+                    <p><button class="button expanded" data-open="exampleModal1{{_id}}">Add Note</button></p>
+                <div class="reveal" id="exampleModal1{{_id}}" data-reveal>
+                  <input type="text" value="" placeholder="Enter Note">
+                  <div class="button" value="submit" id="savenote" data-id="{{_id}}" data-close>Submit</div>
+                  <div class="button float-right" value="delete" id="deletenote" data-id="{{_id}}" data-close>Delete</div>
+                  <button class="close-button" data-close aria-label="Close modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
                       <div class="card-divider">
                         <a href="{{link}}">{{title}}</a>
                       </div>
@@ -50,7 +49,7 @@
               {{/if}}
             {{/each}}
                 {{else}}
-                <div class="nothing-here-container title-container animated fadeIn">
+                <div class="nothing-here-container title-container animated">
                 <h1>Oops, nothing saved yet!</h1>
                 </div>
           {{/if}}
