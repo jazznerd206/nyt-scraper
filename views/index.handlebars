@@ -34,7 +34,8 @@
             <div class="card animated tada" data-id={{_id}} style="width: 300px;">
               <p><button class="button expanded" data-open="exampleModal1{{_id}}">Add Note</button></p>
                 <div class="reveal" id="exampleModal1{{_id}}" data-reveal>
-                  <input type="text" value="" placeholder="Enter Note">
+                  <input class="titleinput" type="text" value="" placeholder="Enter Name">
+                  <input class="bodyinput" type="text" value="" placeholder="Enter Note">
                   <div class="button" value="submit" id="savenote" data-id="{{_id}}" data-close>Submit</div>
                   <div class="button float-right" value="delete" id="deletenote" data-id="{{_id}}" data-close>Delete</div>
                   <button class="close-button" data-close aria-label="Close modal" type="button">
@@ -45,7 +46,7 @@
                     <h4><a href="{{link}}">{{title}}</a></h4>
                 </div>
                 {{#if articles.note}}
-                  <p>{{articles.note}}</p>
+                  <p>{{articles.note.body}}</p>
                 {{/if}}
                 <div class="button save-article" data-id="{{_id}}">
                   <span>Save</span>

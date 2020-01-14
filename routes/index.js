@@ -139,11 +139,11 @@ router.post("/articles/:id", function (req, res) {
 router.get('/deletenote/:id', (req, res) => {
     let thisId = req.params.id
     console.log(thisId);
-    db.Note.findByIdAndDelete(thisId, (err, done) => {
+    db.Note.deleteOne(thisId, (err) => {
         if (err) {
-            console.log(err)
+            console.log('err' + err)
         } else {
-            console.log("notes dropped!");
+            console.log("note dropped!");
         }
     })
 })
