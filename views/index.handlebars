@@ -26,11 +26,11 @@
 </div>
 
 <div class="grid" id="article-container">
-    <div class="grid-x">
+    <div class="grid-x grid-margin-x grid-margin-y">
     {{#if articles}}
       {{#each articles}}
         {{#unless saved}}
-          <div class="cell medium-3 small-12">
+          <div class="cell medium-3  small-6 x-small-12">
             <div class="card animated tada" data-id={{_id}} style="width: 300px;">
               <p><button class="button expanded" data-open="exampleModal1{{_id}}">Add Note</button></p>
                 <div class="reveal" id="exampleModal1{{_id}}" data-reveal>
