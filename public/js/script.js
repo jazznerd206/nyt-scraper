@@ -2,7 +2,6 @@ $(document).ready(() => console.log("ready"));
 
 // clear articles click handler
 $(document).on('click', '#delete', (req, res) => {
-    // $('#article-container').empty();
     $.ajax({
         url: '/delete-articles',
         method: 'DELETE'
@@ -12,7 +11,6 @@ $(document).on('click', '#delete', (req, res) => {
 
 // view saved articles
 $(document).on('click', '#saved-articles', (req, res) => {
-  // $('#article-container').empty();
   $.ajax({
       url: '/saved',
       method: 'GET'
@@ -33,7 +31,6 @@ $(document).on('click', '#scrape', (req, res) => {
 // save article click handler
 $(document).on("click", ".save-article", function() {
     var thisId = $(this).parent().attr("data-id");
-    //console.log('this fucking shit: ' + thisId)
     $.ajax({
       method: "PUT",
       url: "/saved/" + thisId,
@@ -41,19 +38,15 @@ $(document).on("click", ".save-article", function() {
         saved: {$get:true}
       }
     })
-      .then(function(data) {
+      .then((data) => {
         alert("Article Saved!!")
         window.location.reload();
-        console.log(data);
       });
     })
 
 // add note click handler
-$(document).on("click", "#note-open", function() {
+$(document).on("click", "#note-open", () => {
   var thisId = $(this).parent().attr("data-id");
-  //console.log('click')
-  //console.log('note id: ' + thisId)
-
   $.ajax({
     method: "POST",
     url: "/articles/" + thisId,
@@ -62,8 +55,7 @@ $(document).on("click", "#note-open", function() {
       body: $(".bodyinput").val()
     }
   })
-    .then(function(data) {
-      console.log(data);
+    .then((data) => {
       if (data.note) {
         $(".titleinput").val(data.note.title);
         $(".bodyinput").val(data.note.body);
@@ -74,7 +66,6 @@ $(document).on("click", "#note-open", function() {
 // save note click handler
 $(document).on("click", "#savenote", function() {
   var thisId = $(this).attr("data-id");
-  console.log('clicked: ' + thisId)
   $.ajax({
     method: "POST",
     url: "/articles/" + thisId,
@@ -83,8 +74,7 @@ $(document).on("click", "#savenote", function() {
       body: $(".bodyinput").val()
     }
   })
-    .then(function(data) {
-      //console.log(data);
+    .then((data) => {
       $("#notes").empty();
     });
   $(".titleinput").val("");

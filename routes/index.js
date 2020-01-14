@@ -7,17 +7,12 @@ var cheerio = require("cheerio");
 var db = require("../models");
 
 // NPR scrape route
-router.get("/scrape", function(req, res) {
-    // Get the entire body of the html with a request.
+router.get("/scrape", (req, res) => {
     axios.get("https://www.npr.org/sections/news/")
     .then(function(response) {
-        // Load the response into cheerio and save it as a short-hand selector "$"
-        var $ = cheerio.load(response.data);
-
-        // Get every h1 within an article tag...
+        const $ = cheerio.load(response.data);
             $("article h2").each(function(i, element) {
-                // Save an empty result object
-                var result = {};
+                const result = {};
                 result.title = $(this)
                     .children('a')
                     .text();
@@ -27,69 +22,59 @@ router.get("/scrape", function(req, res) {
                 result.summary = $(this)
                     .children('a')
                     .text();
-
-            // Create a new Article with the `result` object built from scraping.
             db.Article.create(result)
-            .then(function(dbArticle) {
-                // View the added result in the console:
-                console.log(dbArticle);
-            })
-            .catch(function(error) {
-                // Send the error, if it exists.
-                return res.json(error);
+            .then(dbArticle => {console.log(dbArticle);
+            }).catch(error => {return res.json(error);
             });
         });
-
-        // Alert the client if the scrape was completed:
         res.send('scrape complete. redirecting.')
     });
 });
 
 // Articles from the db to handlebars.
-router.get("/", function(req, res) {
+router.get("/", (req, res) => {
     db.Article.find({}).limit(15)
     .then((articles) => {
     res.render('index', {articles})
     })
-    .catch(function(error) {
-        res.json(error);
+    .catch((err) => {
+        res.json(err);
     });
 });
 
 
-// All articles from the db
-router.get("/articles", function(req, res) {
+router.get("/articles", (req, res) => {
     db.Article.find({})
-    .then(function(dbArticle) {
+    .then((dbArticle) => {
         res.json(dbArticle);
     })
-    .catch(function(err) {
+    .catch((err) => {
         res.json(err);
     });
 });
 
 // find article by id, populate it with it's note
-router.get("/articles/:id", function(req, res) {
+router.get("/articles/:id", (req, res) => {
     db.Article.findOne({ _id: req.params.id })
     .populate("note")
-    .then(function(dbArticle) {
+    .then((dbArticle) => {
         res.json(dbArticle);
     })
-    .catch(function(err) {
+    .catch((err) => {
         res.json(err);
     });
 });
 
 // set article to saved
-router.put("/saved/:id", function(req, res) {
+router.put("/saved/:id", (req, res) => {
     db.Article.update(
         {_id: req.params.id},
         {saved: true}
     )
-    .then(function(result) {
+    .then((result) => {
         res.json(result);
     })
-    .catch(function(error) {
+    .catch((error) => {
         res.json(error);
     });
 });
@@ -101,16 +86,16 @@ router.get('/saved', (req, res) => {
 })
 
 // drop the Articles collection.
-router.get("/delete-articles", function(req, res, next) {
-    db.Article.deleteMany({}, function(err) {
+router.get("/delete-articles", (req, res, next) => {
+    db.Article.deleteMany({}, (err) => {
         if (err) {
             console.log(err)
         } else {
             console.log("articles dropped!");
         }
     })
-    .then(function (dropnotes) {
-        db.Note.deleteMany({}, function(err) {
+    .then((dropnotes) => {
+        db.Note.deleteMany({}, (err) => {
             if (err) {
                 console.log(err)
             } else {
@@ -122,10 +107,10 @@ router.get("/delete-articles", function(req, res, next) {
 });
 
 // post notes
-router.post("/articles/:id", function (req, res) {
-    let noteBody = req.body;
-    let article = req.params.id;
-    db.Note.create(noteBody).then(function (response) {
+router.post("/articles/:id", (req, res) => {
+    const noteBody = req.body;
+    const article = req.params.id;
+    db.Note.create(noteBody).then((response) => {
       db.Article.findByIdAndUpdate(article, { $set: { note: response } }, function (err, done) {
         if (err) {
           console.log(err);
@@ -139,7 +124,7 @@ router.post("/articles/:id", function (req, res) {
 
 // delete single note
 router.get('/deletenote/:id', (req, res) => {
-    let thisId = req.params.id
+    const thisId = req.params.id
     console.log(thisId);
     db.Article.findByIdAndUpdate(thisId,{$set:{body:""}}, (err) => {
         if (err) {
