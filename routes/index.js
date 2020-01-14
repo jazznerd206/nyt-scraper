@@ -135,11 +135,13 @@ router.post("/articles/:id", function (req, res) {
     });
   });
 
+// AS OF TIME OF SUBMISSION, DELETE NOTE IS STILL NOT FUNCTIONING. I HAVE 10 HOURS TO FIGURE IT OUT. THE FOLLOWING CODE IS MY ATTEMPT AT IT, I WILL DELETE THIS NOTE WHEN IT IS COMPLETED.
+
 // delete single note
 router.get('/deletenote/:id', (req, res) => {
     let thisId = req.params.id
     console.log(thisId);
-    db.Note.deleteOne(thisId, (err) => {
+    db.Article.findByIdAndUpdate(thisId,{$set:{body:""}}, (err) => {
         if (err) {
             console.log('err' + err)
         } else {
