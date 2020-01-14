@@ -1,6 +1,9 @@
 /* global styles */
 body {
-    background:antiquewhite;
+    background-image: url('/images/Newspaper.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     font-family: 'Lora';
 }
 
@@ -8,12 +11,14 @@ body {
 
 /* article styles */
 #article-container {
-    background: orange;
-    margin: 40px 40px 40px 40px;
-    padding: 40px 40px 40px 40px
+  background: rgb(100,200,300,.6);
+  border-radius: 25px;
+  margin: 40px 40px 40px 40px;
+  padding: 40px 40px 40px 40px
 }
 #saved-article-container {
-  background: orange;
+  background: rgb(100,200,300,.6);
+  border-radius: 25px;
   margin: 40px 40px 40px 40px;
   padding: 40px 40px 40px 40px
 }

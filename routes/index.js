@@ -125,5 +125,17 @@ router.get("/delete-articles", function(req, res, next) {
     })
     res.render('index');
 });
+router.post("/articles/:id", function (req, res) {
+    var newNote = req.body;
+    var article = req.params.id;
+    db.Note.create(newNote).then(function (response) {
+      db.Article.findByIdAndUpdate(article, { $set: { note: response } }, function (err, done) {
+        if (err) {
+          console.log(err);
+        }
+        res.send(done);
+      });
+    });
+  });
 
 module.exports = router;
