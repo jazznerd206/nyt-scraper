@@ -1,15 +1,11 @@
-// Dependencies
 var express = require("express");
 var router = express.Router();
 
-// *** Scraping Tools *** //
 var axios = require("axios");
 var cheerio = require("cheerio");
 
-// Require all models
 var db = require("../models");
 
-// *** Route for Scraping *** //
 router.get("/scrape", function(req, res) {
     // Get the entire body of the html with a request.
     axios.get("https://www.npr.org/sections/news/")
@@ -48,9 +44,7 @@ router.get("/scrape", function(req, res) {
     });
 });
 
-// *** Routes to export to server.js *** //
-
-// Route to get all Articles from the db to handlebars.
+// Articles from the db to handlebars.
 router.get("/", function(req, res) {
     db.Article.find({}).limit(15)
     .then((articles) => {
@@ -62,7 +56,7 @@ router.get("/", function(req, res) {
 });
 
 
-// Route for getting all Articles from the db
+// All articles from the db
 router.get("/articles", function(req, res) {
     db.Article.find({})
     .then(function(dbArticle) {
@@ -73,7 +67,7 @@ router.get("/articles", function(req, res) {
     });
 });
 
-// Route for grabbing a specific Article by id, populate it with it's note
+// find article by id, populate it with it's note
 router.get("/articles/:id", function(req, res) {
     db.Article.findOne({ _id: req.params.id })
     .populate("note")
@@ -85,7 +79,7 @@ router.get("/articles/:id", function(req, res) {
     });
 });
 
-// Route to save an Article.
+// set article to saved
 router.put("/saved/:id", function(req, res) {
     db.Article.update(
         {_id: req.params.id},
@@ -99,13 +93,13 @@ router.put("/saved/:id", function(req, res) {
     });
 });
 
-// Route to view saved articles
+// view saved articles
 router.get('/saved', (req, res) => {
     db.Article.find({ "saved" : {$get:true}})
     .then((result => res.render('index', {result})))
 })
 
-// Route to drop the Articles collection.
+// drop the Articles collection.
 router.get("/delete-articles", function(req, res, next) {
     db.Article.deleteMany({}, function(err) {
         if (err) {
@@ -126,7 +120,7 @@ router.get("/delete-articles", function(req, res, next) {
     res.render('index');
 });
 
-//route to post notes
+// post notes
 router.post("/articles/:id", function (req, res) {
     let noteBody = req.body;
     let article = req.params.id;
@@ -139,5 +133,10 @@ router.post("/articles/:id", function (req, res) {
       });
     });
   });
+
+// delete single note
+
+
+
 
 module.exports = router;
