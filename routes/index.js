@@ -6,6 +6,7 @@ var cheerio = require("cheerio");
 
 var db = require("../models");
 
+// NPR scrape route
 router.get("/scrape", function(req, res) {
     // Get the entire body of the html with a request.
     axios.get("https://www.npr.org/sections/news/")
@@ -95,8 +96,8 @@ router.put("/saved/:id", function(req, res) {
 
 // view saved articles
 router.get('/saved', (req, res) => {
-    db.Article.find({ "saved" : {$get:true}})
-    .then((result => res.render('index', {result})))
+    db.Article.find({ "saved" : true})
+    .then((articles => res.render('saved', {articles})))
 })
 
 // drop the Articles collection.
@@ -135,7 +136,17 @@ router.post("/articles/:id", function (req, res) {
   });
 
 // delete single note
-
+router.get('/deletenote/:id', (req, res) => {
+    let thisId = req.params.id
+    console.log(thisId);
+    db.Note.findByIdAndDelete(thisId, (err, done) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log("notes dropped!");
+        }
+    })
+})
 
 
 

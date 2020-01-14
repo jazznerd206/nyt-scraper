@@ -6,7 +6,18 @@ body {
     background-attachment: fixed;
     font-family: 'Lora';
 }
-
+.title-container {
+  margin: 0 auto;
+  max-width: 750px;
+  background-image: radial-gradient(#A3CEF1, #78CDD7);
+  box-shadow: 50px 50px 50px;
+  border-radius: 25px;
+}
+h1 {
+  text-align: center;
+  margin: 50px 50px 50px 50px;
+  padding: 50px 50px 50px 50px;
+}
 
 
 /* article styles */
