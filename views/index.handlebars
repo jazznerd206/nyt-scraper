@@ -33,11 +33,11 @@
           <div class="cell medium-3  small-6 x-small-12">
             <div class="card animated tada" data-id={{_id}} style="width: 300px;">
               <p><button class="button expanded" data-open="exampleModal1{{_id}}">Add Note</button></p>
-              <p><button class="button expanded" id="show-notes" data-id={{_id}}>Show Note</button></p>
                 
                 <div class="reveal" id="exampleModal1{{_id}}" data-reveal>
                   <div class="note-container">
-                    <h2>NOTES: </h2><div id="note-holder"></div>
+                    <p><button class="button expanded" id="show-notes" data-id={{_id}}>Show Note</button></p>
+                    <h2>NOTES: </h2><div id="note-holder" data-id={{_id}}></div>
                   </div>
                   <input class="titleinput" type="text" value="" placeholder="Enter Title">
                   <input class="bodyinput" type="text" value="" placeholder="Enter Note">
@@ -47,7 +47,6 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <h2>NOTES: </h2><div class="note-holder" id="note-holder"></div>                    
                 <div class="card-divider">
                     <h4><a href="{{link}}">{{title}}</a></h4>
                 </div>

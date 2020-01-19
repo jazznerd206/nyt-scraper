@@ -91,11 +91,11 @@ $(document).on("click", "#show-notes", function () {
           const noteID = data.note._id;
           const noteTitle = data.note.title;
           const noteBody = data.note.body;
-          const newNote = $('<div class="note d-flex justify-content-between p-1">')
+          const newNote = $('<div class="note">')
               .attr("data-id", noteID)
               .append("<p>" + noteTitle)
               .append("<p>" + noteBody)
-              .append($("<button class='btn btn-danger' id='delete-note'>x</button>"));
+              .append($("<div class='button' id='delete-note'>x</div>"));
           $("#note-holder").append(newNote);
       });
 });
@@ -106,7 +106,7 @@ $(document).on("click", "#show-notes", function () {
 $(document).on("click", "#delete-note", function() {
   const note = $(this).parent();
   const thisId = $(this).parent().attr("data-id");
-  $(".note-holder").empty();
+  $("#note-holder").empty();
   console.log('clicked: ' + thisId)
   $.ajax({
     method: "DELETE",
