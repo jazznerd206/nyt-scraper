@@ -33,20 +33,26 @@
           <div class="cell medium-3  small-6 x-small-12">
             <div class="card animated tada" data-id={{_id}} style="width: 300px;">
               <p><button class="button expanded" data-open="exampleModal1{{_id}}">Add Note</button></p>
+              <p><button class="button expanded" id="show-notes" data-id={{_id}}>Show Note</button></p>
+                
                 <div class="reveal" id="exampleModal1{{_id}}" data-reveal>
-                  <input class="titleinput" type="text" value="" placeholder="Enter Name">
+                  <div class="note-container">
+                    <h2>NOTES: </h2><div id="note-holder"></div>
+                  </div>
+                  <input class="titleinput" type="text" value="" placeholder="Enter Title">
                   <input class="bodyinput" type="text" value="" placeholder="Enter Note">
                   <div class="button" value="submit" id="savenote" data-id="{{_id}}" data-close>Submit</div>
-                  <div class="button float-right" value="delete" id="deletenote" data-id="{{_id}}" data-close>Delete</div>
+                  <div class="button float-right" value="delete" id="delete-note" data-id="{{_id}}" data-close>Delete</div>
                   <button class="close-button" data-close aria-label="Close modal" type="button">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
+                <h2>NOTES: </h2><div class="note-holder" id="note-holder"></div>                    
                 <div class="card-divider">
                     <h4><a href="{{link}}">{{title}}</a></h4>
                 </div>
-                {{#if articles.note}}
-                  <p>{{articles.note.body}}</p>
+                {{#if note}}
+                  <p>{{note.body}}</p>
                 {{/if}}
                 <div class="button save-article" data-id="{{_id}}">
                   <span>Save</span>

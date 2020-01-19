@@ -82,16 +82,37 @@ $(document).on("click", "#savenote", function() {
   alert("Note Saved");
 });
 
+// show associated notes with the article
+$(document).on("click", "#show-notes", function () {
+  const dataID = $(this).data("id");
+  $.get("/articles/" + dataID)
+      .then(function (data) {
+        console.log(data.note.body);
+          const noteID = data.note._id;
+          const noteTitle = data.note.title;
+          const noteBody = data.note.body;
+          const newNote = $('<div class="note d-flex justify-content-between p-1">')
+              .attr("data-id", noteID)
+              .append("<p>" + noteTitle)
+              .append("<p>" + noteBody)
+              .append($("<button class='btn btn-danger' id='delete-note'>x</button>"));
+          $("#note-holder").append(newNote);
+      });
+});
+
+
+
 // remove note click handler
-$(document).on("click", "#deletenote", function() {
-  var thisId = $(this).attr("data-id");
+$(document).on("click", "#delete-note", function() {
+  const note = $(this).parent();
+  const thisId = $(this).parent().attr("data-id");
+  $(".note-holder").empty();
   console.log('clicked: ' + thisId)
   $.ajax({
     method: "DELETE",
     url: "/deletenote/" + thisId,
   })
     .then(function(data) {
-      $("#notes").empty();
     });
   alert("Note Deleted");
 });

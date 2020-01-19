@@ -55,10 +55,11 @@ router.get("/articles", (req, res) => {
 
 // find article by id, populate it with it's note
 router.get("/articles/:id", (req, res) => {
-    db.Article.findOne({ _id: req.params.id })
+    db.Article.findById({ _id: req.params.id })
     .populate("note")
     .then((dbArticle) => {
         res.json(dbArticle);
+            console.log('this note is attached ' + dbArticle)
     })
     .catch((err) => {
         res.json(err);
@@ -109,13 +110,13 @@ router.get("/delete-articles", (req, res, next) => {
 // post notes
 router.post("/articles/:id", (req, res) => {
     const noteBody = req.body;
-    const article = req.params.id;
+    const article = req.params.id;  
     db.Note.create(noteBody).then((response) => {
       db.Article.findByIdAndUpdate(article, { $set: { note: response } }, function (err, done) {
         if (err) {
           console.log(err);
         }
-        res.send(done);
+        res.send(done); 
       });
     });
   });
