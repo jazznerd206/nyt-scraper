@@ -112,7 +112,7 @@ router.post("/articles/:id", (req, res) => {
     const noteBody = req.body;
     const article = req.params.id;  
     db.Note.create(noteBody).then((response) => {
-      db.Articles.findByIdAndUpdate(article, { $set: { note: response } }, function (err, done) {
+      db.Article.findByIdAndUpdate(article, { $set: { note: response } }, function (err, done) {
       });
     }).then(noteArticle => res.json(noteArticle)).catch(err => console.log(err))
   });
@@ -124,7 +124,7 @@ router.delete("/deletenote/:id", function (req, res) {
     console.log('note id ' + req.params.id);
     db.Note.deleteOne({ _id: req.params.id })
       .then(function (dbNote) {
-        db.Articles.update(
+        db.Article.update(
           { note: { $in: [req.params.id] } },
           { $pull: { note: [req.params.id] } }
         )
