@@ -59,7 +59,7 @@ router.get("/articles/:id", (req, res) => {
     .populate("note")
     .then((dbArticle) => {
         res.json(dbArticle);
-            console.log('this note is attached ' + dbArticle)
+            //console.log('this note is attached ' + dbArticle)
     })
     .catch((err) => {
         res.json(err);

@@ -70,15 +70,15 @@ $(document).on("click", "#savenote", function() {
     method: "POST",
     url: "/articles/" + thisId,
     data: {
-      title: $(".titleinput").val(),
-      body: $(".bodyinput").val()
+      title: $("#titleinput").val(),
+      body: $("#bodyinput").val()
     }
   })
     .then((data) => {
       $("#notes").empty();
     });
-  $(".titleinput").val("");
-  $(".bodyinput").val("");
+  $("#titleinput").val("");
+  $("#bodyinput").val("");
   alert("Note Saved");
 });
 
@@ -87,16 +87,15 @@ $(document).on("click", "#show-notes", function () {
   const dataID = $(this).data("id");
   $.get("/articles/" + dataID)
       .then(function (data) {
-        //console.log(data.note.body);
-          const noteID = data.note._id;
-          const noteTitle = data.note.title;
-          const noteBody = data.note.body;
-          const newNote = $('<div class="note">')
-              .attr("data-id", noteID)
-              .append("<p>" + noteTitle)
-              .append("<p>" + noteBody)
-              .append($("<div class='button' id='delete-note'>x</div>"));
-          $("#note-holder").append(newNote);
+        const noteID = data.note._id;
+        const noteTitle = data.note.title;
+        const noteBody = data.note.title;
+        const newNote = $('<div class="note">')
+            .attr("data-id", noteID)
+            .append("<p>" + noteTitle)
+            .append("<p>" + noteBody)
+            .append($("<div class='button' id='delete-note'>x</div>"));
+        $("#note-holder").append(newNote);
       });
 });
 
@@ -107,7 +106,7 @@ $(document).on("click", "#delete-note", function() {
   const note = $(this).parent();
   const thisId = $(this).parent().attr("data-id");
   $("#note-holder").empty();
-  console.log('clicked: ' + thisId)
+  //console.log('clicked: ' + thisId)
   $.ajax({
     method: "DELETE",
     url: "/deletenote/" + thisId,
