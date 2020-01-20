@@ -65,6 +65,7 @@ $(document).on("click", "#note-open", () => {
 
 // save note click handler
 $(document).on("click", "#savenote", function() {
+  event.preventDefault();
   var thisId = $(this).attr("data-id");
   $.ajax({
     method: "POST",
@@ -104,6 +105,7 @@ $(document).on("click", "#show-notes", function () {
 
 // remove note click handler
 $(document).on("click", "#delete-note", function() {
+  event.preventDefault();
   const note = $(this).parent();
   const thisId = $(this).parent().attr("data-id");
   $("#note-holder").empty();
