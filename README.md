@@ -11,6 +11,8 @@ Web scraper using axios/cheerio/mongodb
 
 ## Installation
 
+live app: https://still-cove-06577.herokuapp.com/
+
 - clone repository
 - run npm i
     - dependencies
